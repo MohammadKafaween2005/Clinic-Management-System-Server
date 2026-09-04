@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import "dotenv/config";
-import pool from "./db.js";
+import PatientRoutes from "./routes/PatientRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -20,7 +20,4 @@ app.listen(PORT, () => {
   console.log(`Server Running On Port ${PORT}`);
 });
 
-app.get("/api/patients", async (req, res) => {
-  const result = await pool.query("SELECT * FROM patients");
-  res.json(result.rows);
-});
+app.use("/api/patients", PatientRoutes);
