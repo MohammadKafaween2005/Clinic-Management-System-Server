@@ -5,6 +5,7 @@ import "dotenv/config";
 import PatientRoutes from "./routes/PatientRoutes.js";
 import AppointmentRoutes from "./routes/AppointmentRoutes.js";
 import MedicalRecordRoutes from "./routes/MedicalRecordRoutes.js"
+import AuthRoutes from "./routes/AuthRoutes.js"
 import router from "./routes/PatientRoutes.js";
 
 dotenv.config();
@@ -27,3 +28,4 @@ app.listen(PORT, () => {
 app.use("/api/patients", PatientRoutes);
 app.use("/api/appointments", AppointmentRoutes);
 app.use("/api/medical-records",MedicalRecordRoutes);
+app.use("/api/auth",AuthRoutes);
