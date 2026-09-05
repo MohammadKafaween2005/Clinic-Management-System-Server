@@ -158,4 +158,34 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `DELETE FROM patients
+       WHERE patient_id = $1
+       RETURNING *`,
+      [id],
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: "Patient not found",
+      });
+    }
+
+    res.json({
+      message: "Patient deleted successfully",
+      patient: result.rows[0],
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Server error",
+    });
+  }
+});
+
 export default router;
